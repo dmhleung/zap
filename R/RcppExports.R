@@ -38,7 +38,8 @@ createParaMat <- function(param, X_tilde) {
 
 #' form H matrix from unmasked data
 #'
-#' @param x A single integer.
+#' @param U A vector of u-values
+#' @param extraParam a vector containing gamma_l and gamma_r
 form_Hmat_unmask <- function(U, paraMat, extraParam) {
     .Call(`_zap_form_Hmat_unmask`, U, paraMat, extraParam)
 }

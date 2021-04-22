@@ -7,7 +7,9 @@
 form_Hmat_unmask(U, paraMat, extraParam)
 }
 \arguments{
-\item{x}{A single integer.}
+\item{U}{A vector of u-values}
+
+\item{extraParam}{a vector containing gamma_l and gamma_r}
 }
 \description{
 form H matrix from unmasked data
