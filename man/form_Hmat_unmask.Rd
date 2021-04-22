@@ -9,6 +9,8 @@ form_Hmat_unmask(U, paraMat, extraParam)
 \arguments{
 \item{U}{A vector of u-values}
 
+\item{paraMat}{a parameter matrix involving beta and theta}
+
 \item{extraParam}{a vector containing gamma_l and gamma_r}
 }
 \description{
