@@ -37,7 +37,7 @@ arma::mat createParaMat(arma::vec param, arma::mat X_tilde){
 //'
 //' @param U A vector of u-values
 //' @param paraMat a parameter matrix involving beta and theta
-//' @param extraParam a vector containing gamma_l and gamma_r
+//' @param extraParam a vector of length 2 containing gamma_l and gamma_r
 // [[Rcpp::export]]
 arma::mat form_Hmat_unmask(arma::vec U, arma::mat paraMat, arma::vec extraParam){
 

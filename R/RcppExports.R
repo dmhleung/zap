@@ -40,7 +40,7 @@ createParaMat <- function(param, X_tilde) {
 #'
 #' @param U A vector of u-values
 #' @param paraMat a parameter matrix involving beta and theta
-#' @param extraParam a vector containing gamma_l and gamma_r
+#' @param extraParam a vector of length 2 containing gamma_l and gamma_r
 form_Hmat_unmask <- function(U, paraMat, extraParam) {
     .Call(`_zap_form_Hmat_unmask`, U, paraMat, extraParam)
 }
