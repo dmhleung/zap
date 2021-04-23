@@ -53,9 +53,8 @@ a list with containing the followings: \itemize{ \item rej_index: a
 vector of indices corresponding to the rejected hypotheses. Can be of
 length 0 if no hypotheses are rejected. \item stat: a vector of resulting
 test statistics \item mirror_stat: a vector of "mirror" test statistics
-\item param: a vector of estimated parameters with the same length as
-param_init, where \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and
-\eqn{\theta_r} are arranged in analogous positions. }
+\item param: a vector of estimated parameters concatenating  \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and
+\eqn{\theta_r} in that order }
 }
 \description{
 Asymptotic version of ZAP based on a 3-component beta mixture
