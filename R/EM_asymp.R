@@ -1,6 +1,8 @@
-#' @title EM for asymptotic ZAP
-#' @description an internal function used to perform the EM for zap_asymp
-#' @examples TBD
+
+
+# @title EM for asymptotic ZAP
+# @description an internal function used to perform the EM for zap_asymp
+# @examples TBD
 
 
 
@@ -23,9 +25,9 @@ EM_asymp= function(z, param,  tol= 0.0001 , pprob = NULL,
 
 
 
-#' @title EM asymp fix point function for SQUAREM
-#' @description an internal function used to perform the EM for zap_asymp using the  SQUAREM package
-#' @examples TBD
+# @title EM asymp fix point function for SQUAREM
+# @description an internal function used to perform the EM for zap_asymp using the  SQUAREM package
+# @examples TBD
 EM_asymp_fix_point_fn = function(param, U, extraParam, X_tilde ){
   k <- ncol(X_tilde)
   paraMat <- createParaMat(param, X_tilde)
@@ -52,9 +54,9 @@ EM_asymp_fix_point_fn = function(param, U, extraParam, X_tilde ){
 }
 
 
-#' @title Negative log-likelihood of the 3-component beta mixture
-#' @description an internal function used to return the objective function value for the EM of zap_asymp
-#' @examples TBD
+# @title Negative log-likelihood of the 3-component beta mixture
+# @description an internal function used to return the objective function value for the EM of zap_asymp
+# @examples TBD
 EM_asymp_obj_fn = function(param, U,  extraParam, X_tilde ){
   paraMat <- createParaMat(param, X_tilde)
   loglike = LogLike_asymp(U = U, paraMat = paraMat, extraParam = extraParam)

@@ -6,19 +6,14 @@ using namespace Rcpp;
 
 
 
-//' log with truncation
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 arma::vec trunc_log_arma(arma::vec U) {
   return(arma::trunc_log(U)) ;
 }
 
 
-//' create para matrix
-//'
-//' @param param the beta and theta you use to create a paraMat
-//' @param X_tilde the augmented covariate matrix
+
 // [[Rcpp::export]]
 arma::mat createParaMat(arma::vec param, arma::mat X_tilde){
   int k = X_tilde.n_cols;
@@ -33,11 +28,6 @@ arma::mat createParaMat(arma::vec param, arma::mat X_tilde){
 
 
 
-//' form H matrix from unmasked data
-//'
-//' @param U A vector of u-values
-//' @param paraMat a parameter matrix involving beta and theta
-//' @param extraParam a vector of length 2 containing gamma_l and gamma_r
 // [[Rcpp::export]]
 arma::mat form_Hmat_unmask(arma::vec U, arma::mat paraMat, arma::vec extraParam){
 
@@ -61,9 +51,7 @@ arma::mat form_Hmat_unmask(arma::vec U, arma::mat paraMat, arma::vec extraParam)
 
 
 
-//' form H matrix from unmasked data with initial pi matrix and beta0
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 arma::mat form_Hmat_unmask_init(arma::vec U, arma::vec beta0, arma::mat piMat,
                                 arma::mat X_tilde, arma::vec extraParam){
@@ -85,9 +73,7 @@ arma::mat form_Hmat_unmask_init(arma::vec U, arma::vec beta0, arma::mat piMat,
 }
 
 
-//' This function forms the Hmat and Ymat for masked u-values ALONE
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 Rcpp::List form_Hmat_Yab_mask_init(arma::vec U_mask, arma::vec U_mirror_mask, arma::vec beta0,
                                    arma::mat piMat, arma::mat X_tilde, arma::vec extraParam){
@@ -129,9 +115,7 @@ Rcpp::List form_Hmat_Yab_mask_init(arma::vec U_mask, arma::vec U_mirror_mask, ar
 
 
 
-//' This function forms the Hmat and Ymat for masked u-values ALONE
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 Rcpp::List form_Hmat_Yab_mask(arma::vec U_mask, arma::vec U_mirror_mask,
                               arma::mat paraMat, arma::vec extraParam){
@@ -173,9 +157,7 @@ Rcpp::List form_Hmat_Yab_mask(arma::vec U_mask, arma::vec U_mirror_mask,
 }
 
 
-//' arrange an overall Hmat
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 arma::mat overall_Hmat(arma::mat Hmat_mask, arma::mat Hmat_unmask, arma::uvec mask_set, arma::uvec unmask_set){
 
@@ -185,9 +167,7 @@ arma::mat overall_Hmat(arma::mat Hmat_mask, arma::mat Hmat_unmask, arma::uvec ma
   return Hmat;
 }
 
-//' arrange an overall Ymat
-//'
-//' @param x A single integer.
+
 // [[Rcpp::export]]
 arma::mat overall_Ymat(arma::mat Ymat_mask, arma::vec U_unmask, arma::uvec mask_set, arma::uvec unmask_set){
   int n = mask_set.n_elem+ unmask_set.n_elem;

@@ -8,16 +8,7 @@
 using namespace Rcpp;
 
 
-//' negative log-likelihood of of a left-leaning beta density
-//'
-//' This is a function that evaluate the left leaning beta negative log likelihood for a vector of u-values
-//' @param beta_l The first shape parameter
-//' @param U A vector of u-values to evaluate the beta density on 
-//' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-//' @param gamma_l The second shape parameter, should be greater than 2
-//' @return the evaluated negative log likelihood value
-//' @details TBD
-//' @examples TBD
+
 //[[Rcpp::export]]
 double neg_LogLike_LeftBeta(arma::vec beta_l, arma::vec U, arma::mat X_tilde, double gamma_l){
   arma::vec k_l = 1/(1 + exp(-X_tilde*beta_l));
@@ -27,16 +18,7 @@ double neg_LogLike_LeftBeta(arma::vec beta_l, arma::vec U, arma::mat X_tilde, do
 }
 
 
-//' negative left beta log-likelihood gradient
-//'
-//' This is a function that evaluate the left leaning beta negative log likelihood gradient for a vector of u-values
-//' @param beta_l The first shape parameter
-//' @param U A vector of u-values to evaluate the beta density on 
-//' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-//' @param gamma_l The second shape parameter, should be greater than 2
-//' @return the evaluated negative log likelihood gradient, a vector of dimension p
-//' @details TBD
-//' @examples TBD
+
 // [[Rcpp::export]]
 arma::vec neg_LogLike_LeftBeta_grad(arma::vec beta_l, arma::vec U, arma::mat X_tilde, double gamma_l) {
 
@@ -55,16 +37,7 @@ arma::vec neg_LogLike_LeftBeta_grad(arma::vec beta_l, arma::vec U, arma::mat X_t
 }
 
 
-//' negative log-likelihood of of a right-leaning beta density
-//'
-//' This is a function that evaluate the right leaning beta negative log likelihood for a vector of u-values
-//' @param beta_r The first shape parameter
-//' @param U A vector of u-values to evaluate the beta density on 
-//' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-//' @param gamma_r The second shape parameter, should be greater than 2
-//' @return the evaluated negative log likelihood value
-//' @details TBD
-//' @examples TBD
+
 //[[Rcpp::export]]
 double neg_LogLike_RightBeta(arma::vec beta_r, arma::vec U, arma::mat X_tilde, double gamma_r){
   arma::vec k_r = 1/(1 + exp(-X_tilde*beta_r));
@@ -75,16 +48,15 @@ double neg_LogLike_RightBeta(arma::vec beta_r, arma::vec U, arma::mat X_tilde, d
 
 
 
-//' negative right beta log-likelihood gradient
-//'
-//' This is a function that evaluate the right leaning beta negative log likelihood gradient for a vector of u-values
-//' @param beta_r The first shape parameter
-//' @param U A vector of u-values to evaluate the beta density on 
-//' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-//' @param gamma_r The second shape parameter, should be greater than 2
-//' @return the evaluated negative log likelihood gradient, a vector of dimension p
-//' @details TBD
-//' @examples TBD
+// negative right beta log-likelihood gradient
+//
+// This is a function that evaluate the right leaning beta negative log likelihood gradient for a vector of u-values
+//param beta_r The first shape parameter
+//param U A vector of u-values to evaluate the beta density on 
+//param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
+//param gamma_r The second shape parameter, should be greater than 2
+//return the evaluated negative log likelihood gradient, a vector of dimension p
+
 // [[Rcpp::export]]
 arma::vec neg_LogLike_RightBeta_grad(arma::vec beta_r, arma::vec U, arma::mat X_tilde, double gamma_r) {
 

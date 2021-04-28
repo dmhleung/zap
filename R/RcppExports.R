@@ -5,133 +5,54 @@ blfdr_fn <- function(u_main, unif_dat, eta1, eta2, eta3, eta4, extraParam) {
     .Call(`_zap_blfdr_fn`, u_main, unif_dat, eta1, eta2, eta3, eta4, extraParam)
 }
 
-#' test statistics based on 3-component beta mixture
-#'
-#' This is a function that evaluate the accessor functions based on the 3-component beta mixture on a vector of u-values
-#' @param U A vector of u-values to evaluate the beta density on 
-#' @param eta1 a vector of linear predictors, each being \eqn{ (1, X)'\beta_l} for each test. Same length as U.
-#' @param eta2 a vector of linear predictors, each being \eqn{ (1, X)'\beta_r} for each test. Same length as U.
-#' @param eta3 a vector of linear predictors, each being \eqn{ (1, X)'\theta_l} for each test. Same length as U.
-#' @param eta4 a vector of linear predictors, each being \eqn{ (1, X)'\theta_r} for each test. Same length as U.
-#' @param extraParam A two-element vector, \eqn{(\gamma_l, \gamma_r)}.
-#' @return the test statistics which are the accessor functions evaluated at U.
-#' @details TBD
-#' @examples TBD
 blfdr_stat <- function(U, eta1, eta2, eta3, eta4, extraParam) {
     .Call(`_zap_blfdr_stat`, U, eta1, eta2, eta3, eta4, extraParam)
 }
 
-#' log with truncation
-#'
-#' @param x A single integer.
 trunc_log_arma <- function(U) {
     .Call(`_zap_trunc_log_arma`, U)
 }
 
-#' create para matrix
-#'
-#' @param param the beta and theta you use to create a paraMat
-#' @param X_tilde the augmented covariate matrix
 createParaMat <- function(param, X_tilde) {
     .Call(`_zap_createParaMat`, param, X_tilde)
 }
 
-#' form H matrix from unmasked data
-#'
-#' @param U A vector of u-values
-#' @param paraMat a parameter matrix involving beta and theta
-#' @param extraParam a vector of length 2 containing gamma_l and gamma_r
 form_Hmat_unmask <- function(U, paraMat, extraParam) {
     .Call(`_zap_form_Hmat_unmask`, U, paraMat, extraParam)
 }
 
-#' form H matrix from unmasked data with initial pi matrix and beta0
-#'
-#' @param x A single integer.
 form_Hmat_unmask_init <- function(U, beta0, piMat, X_tilde, extraParam) {
     .Call(`_zap_form_Hmat_unmask_init`, U, beta0, piMat, X_tilde, extraParam)
 }
 
-#' This function forms the Hmat and Ymat for masked u-values ALONE
-#'
-#' @param x A single integer.
 form_Hmat_Yab_mask_init <- function(U_mask, U_mirror_mask, beta0, piMat, X_tilde, extraParam) {
     .Call(`_zap_form_Hmat_Yab_mask_init`, U_mask, U_mirror_mask, beta0, piMat, X_tilde, extraParam)
 }
 
-#' This function forms the Hmat and Ymat for masked u-values ALONE
-#'
-#' @param x A single integer.
 form_Hmat_Yab_mask <- function(U_mask, U_mirror_mask, paraMat, extraParam) {
     .Call(`_zap_form_Hmat_Yab_mask`, U_mask, U_mirror_mask, paraMat, extraParam)
 }
 
-#' arrange an overall Hmat
-#'
-#' @param x A single integer.
 overall_Hmat <- function(Hmat_mask, Hmat_unmask, mask_set, unmask_set) {
     .Call(`_zap_overall_Hmat`, Hmat_mask, Hmat_unmask, mask_set, unmask_set)
 }
 
-#' arrange an overall Ymat
-#'
-#' @param x A single integer.
 overall_Ymat <- function(Ymat_mask, U_unmask, mask_set, unmask_set) {
     .Call(`_zap_overall_Ymat`, Ymat_mask, U_unmask, mask_set, unmask_set)
 }
 
-#' negative log-likelihood of of a left-leaning beta density
-#'
-#' This is a function that evaluate the left leaning beta negative log likelihood for a vector of u-values
-#' @param beta_l The first shape parameter
-#' @param U A vector of u-values to evaluate the beta density on 
-#' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-#' @param gamma_l The second shape parameter, should be greater than 2
-#' @return the evaluated negative log likelihood value
-#' @details TBD
-#' @examples TBD
 neg_LogLike_LeftBeta <- function(beta_l, U, X_tilde, gamma_l) {
     .Call(`_zap_neg_LogLike_LeftBeta`, beta_l, U, X_tilde, gamma_l)
 }
 
-#' negative left beta log-likelihood gradient
-#'
-#' This is a function that evaluate the left leaning beta negative log likelihood gradient for a vector of u-values
-#' @param beta_l The first shape parameter
-#' @param U A vector of u-values to evaluate the beta density on 
-#' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-#' @param gamma_l The second shape parameter, should be greater than 2
-#' @return the evaluated negative log likelihood gradient, a vector of dimension p
-#' @details TBD
-#' @examples TBD
 neg_LogLike_LeftBeta_grad <- function(beta_l, U, X_tilde, gamma_l) {
     .Call(`_zap_neg_LogLike_LeftBeta_grad`, beta_l, U, X_tilde, gamma_l)
 }
 
-#' negative log-likelihood of of a right-leaning beta density
-#'
-#' This is a function that evaluate the right leaning beta negative log likelihood for a vector of u-values
-#' @param beta_r The first shape parameter
-#' @param U A vector of u-values to evaluate the beta density on 
-#' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-#' @param gamma_r The second shape parameter, should be greater than 2
-#' @return the evaluated negative log likelihood value
-#' @details TBD
-#' @examples TBD
 neg_LogLike_RightBeta <- function(beta_r, U, X_tilde, gamma_r) {
     .Call(`_zap_neg_LogLike_RightBeta`, beta_r, U, X_tilde, gamma_r)
 }
 
-#' negative right beta log-likelihood gradient
-#'
-#' This is a function that evaluate the right leaning beta negative log likelihood gradient for a vector of u-values
-#' @param beta_r The first shape parameter
-#' @param U A vector of u-values to evaluate the beta density on 
-#' @param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
-#' @param gamma_r The second shape parameter, should be greater than 2
-#' @return the evaluated negative log likelihood gradient, a vector of dimension p
-#' @details TBD
-#' @examples TBD
 neg_LogLike_RightBeta_grad <- function(beta_r, U, X_tilde, gamma_r) {
     .Call(`_zap_neg_LogLike_RightBeta_grad`, beta_r, U, X_tilde, gamma_r)
 }

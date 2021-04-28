@@ -1,6 +1,6 @@
-#' @title EM for finite-sample ZAP
-#' @description an internal function used to perform the EM for zap_finite
-#' @examples TBD
+# @title EM for finite-sample ZAP
+# @description an internal function used to perform the EM for zap_finite
+# @examples TBD
 
 
 # this will be my EM algorithm for the finite version
