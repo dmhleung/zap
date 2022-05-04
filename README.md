@@ -7,4 +7,4 @@ To install the package in R,  use the command (after installing the devtools pac
 `````````
 devtools::install_github('dmhleung/zap')
 `````````
-### This is a very preliminary version of the package, though it should function well enough to perform the multiple testing methods described in the paper. 
+### This is a preliminary version of the package, but it should function well enough to perform the multiple testing methods described in the paper. 
