@@ -37,7 +37,7 @@
 #' @return a vector of indices of the rejected hypotheses
 #' @export
 #' @examples
-#' TBD
+
 
 zap_finite = function(z, X,
                       beta_incpt_init = c(log(5),  log(5)),

@@ -37,7 +37,7 @@
 #'   \eqn{\theta_r} in that order }
 #' @export
 #' @examples
-#' TBD
+
 
 zap_asymp = function(z,X,
                      beta_incpt_init = c(log(5),  log(5)),
