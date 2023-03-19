@@ -36,9 +36,9 @@
 #'   \item param: a vector of estimated parameters concatenating  \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and
 #'   \eqn{\theta_r} in that order }
 #' @export
-#' @examples #TBD
-#'
-#'
+#' @examples
+#' TBD
+
 zap_asymp = function(z,X,
                      beta_incpt_init = c(log(5),  log(5)),
                      theta_incpt_init =  c(log(.1), log(.1)),
