@@ -63,7 +63,7 @@ zap_asymp = function(z,X,
                        X_tilde = cbind(1, X),
                      uvals.cutoff = uvals.cutoff)
 
-  blfdr_parts <-create_blfdr_parts(u = pnorm(z),
+  blfdr_parts <-create_blfdr_parts(u = stats::pnorm(z),
                                    param = EM_fit$param,
                                    extraParam = gamma,
                                    X = X,

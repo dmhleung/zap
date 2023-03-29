@@ -57,7 +57,7 @@ zap_finite = function(z, X,
   if (is.null(s_l)) s_l = rep(0.2, m)
   if (is.null(s_r)) s_r = rep(0.8, m)
 
-  U = pnorm(z)
+  U = stats::pnorm(z)
   U[U <= uvals.cutoff] <- uvals.cutoff
   U[U >= 1-  uvals.cutoff] <- 1 -  uvals.cutoff
 
@@ -118,7 +118,7 @@ zap_finite = function(z, X,
                         extraParam = gamma, X_tilde = X_tilde)$param
 
 
-      linear_predictors_mask <- X_tilde[mask_set, , drop = F]%*%matrix(param, nr = 1 + p)
+      linear_predictors_mask <- X_tilde[mask_set, , drop = F]%*%matrix(param, nrow = 1 + p)
 
 
       blfdr_mask_outer <-   parallel::mcmapply(FUN = blfdr_stat, U = U_outer[mask_set],
