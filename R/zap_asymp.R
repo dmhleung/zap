@@ -22,6 +22,8 @@
 #'   densities in that order. Default to c(4, 4).
 #' @param gen_size number of random uniformly distributed realizations generated
 #'   to estimate the mirror statistics. Default to 50000.
+#' @param maxit maximum number of iterations for the EM algorithm
+#' @param tol tolerance
 #' @param alpha  targeted FDR level. Default to 0.05.
 #' @param ep additive factor in the numerator of the FDP estimates in ZAP.
 #'   Default is 1. Changing it may result in an inflated FDR of the procedure.
@@ -36,7 +38,7 @@
 #'   \item param: a vector of estimated parameters concatenating  \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and
 #'   \eqn{\theta_r} in that order }
 #' @export
-#' @examples
+#' @examples #TBD
 
 
 zap_asymp = function(z,X,

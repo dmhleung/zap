@@ -41,6 +41,10 @@ densities in that order. Default to c(4, 4).}
 \item{gen_size}{number of random uniformly distributed realizations generated
 to estimate the mirror statistics. Default to 50000.}
 
+\item{maxit}{maximum number of iterations for the EM algorithm}
+
+\item{tol}{tolerance}
+
 \item{ep}{additive factor in the numerator of the FDP estimates in ZAP.
 Default is 1. Changing it may result in an inflated FDR of the procedure.}
 
@@ -64,7 +68,5 @@ working model.
 TBD
 }
 \examples{
-TBD
-
-
+#TBD
 }

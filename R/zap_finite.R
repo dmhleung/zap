@@ -25,6 +25,7 @@
 #'   with all components equal to 0.8.
 #' @param alpha targeted FDR level.  Default to 0.05.
 #' @param maxit maximum number of iterations for every EM update
+#' @param tol tolerance
 #' @param nfits maximum number of EM updates during the ZAP procedure. Default to 100.
 #' @param uvals.cutoff an ``epsilon-small" number. The u-values will be cut off
 #'   to be within the interval \deqn{[uvals.cutoff, 1 - uvals.cutoff].} This
@@ -36,7 +37,7 @@
 #' @details TBD
 #' @return a vector of indices of the rejected hypotheses
 #' @export
-#' @examples
+#' @examples #TBD
 
 
 zap_finite = function(z, X,

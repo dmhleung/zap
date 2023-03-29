@@ -44,6 +44,8 @@ with all components equal to 0.8.}
 
 \item{maxit}{maximum number of iterations for every EM update}
 
+\item{tol}{tolerance}
+
 \item{nfits}{maximum number of EM updates during the ZAP procedure. Default to 100.}
 
 \item{uvals.cutoff}{an ``epsilon-small" number. The u-values will be cut off
@@ -68,5 +70,5 @@ working model.
 TBD
 }
 \examples{
-TBD
+#TBD
 }

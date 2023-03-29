@@ -7,17 +7,18 @@ Authors@R:
            role = c("aut", "cre"),
            email = "dennis.leung@unimelb.edu.au",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: It does z-value based covariate-assisted multiple testing with FDR control.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: It does z-value based covariate-assisted multiple two-sided testing with FDR control.
+License: MIT + file LICENSE
 URL: https://github.com/dmhleung/zap
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 LinkingTo: 
     Rcpp,
     RcppArmadillo
 Imports: 
+    caret,
+    nnet,
     Rcpp,
     SQUAREM
