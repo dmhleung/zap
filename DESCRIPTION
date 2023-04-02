@@ -19,6 +19,7 @@ LinkingTo:
     RcppArmadillo
 Imports: 
     caret,
+    glmnet,
     nnet,
     Rcpp,
     SQUAREM
