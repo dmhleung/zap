@@ -69,3 +69,7 @@ neg_Q_fn_finite_beta_part_grad_cpp <- function(param_beta, Ymat, Hmat, extraPara
     .Call(`_zap_neg_Q_fn_finite_beta_part_grad_cpp`, param_beta, Ymat, Hmat, extraParam, X_tilde)
 }
 
+LogLike_finite <- function(U, U_mirror, paraMat, extraParam, mask_set, unmask_set) {
+    .Call(`_zap_LogLike_finite`, U, U_mirror, paraMat, extraParam, mask_set, unmask_set)
+}
+

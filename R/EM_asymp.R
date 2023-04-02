@@ -10,7 +10,7 @@ EM_asymp= function(z, param,  tol= 0.0001 , pprob = NULL,
                    maxit, extraParam, X_tilde, uvals.cutoff){
 
   k <- ncol(X_tilde)
-  U<- pnorm(z)
+  U<- stats::pnorm(z)
   U[U <= uvals.cutoff] <- uvals.cutoff
   U[U >= 1-  uvals.cutoff] <- 1 -  uvals.cutoff
   squarem_obj <- SQUAREM::squarem(par = param, fixptfn=EM_asymp_fix_point_fn,
@@ -35,7 +35,7 @@ EM_asymp_fix_point_fn = function(param, U, extraParam, X_tilde ){
   Yl_a = trunc_log_arma(U)
   Yl_b = trunc_log_arma(1 - U)
    Umat = cbind( Yl_a ,  Yl_b, Yl_a  , Yl_b)   # Yr_a  = Yl_a, Yr_b  = Yl_b
-  param_beta <- optim(par = param[1:(2*k)],
+  param_beta <- stats::optim(par = param[1:(2*k)],
                       gr = neg_Q_fn_finite_beta_part_grad_cpp,
                       fn = neg_Q_fn_finite_beta_part,
                       Ymat =  Umat , Hmat = Hmat,

@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // blfdr_fn
 arma::vec blfdr_fn(double u_main, arma::vec unif_dat, double eta1, double eta2, double eta3, double eta4, arma::vec extraParam);
 RcppExport SEXP _zap_blfdr_fn(SEXP u_mainSEXP, SEXP unif_datSEXP, SEXP eta1SEXP, SEXP eta2SEXP, SEXP eta3SEXP, SEXP eta4SEXP, SEXP extraParamSEXP) {
@@ -247,6 +252,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// LogLike_finite
+double LogLike_finite(arma::vec U, arma::vec U_mirror, arma::mat paraMat, arma::vec extraParam, arma::uvec mask_set, arma::uvec unmask_set);
+RcppExport SEXP _zap_LogLike_finite(SEXP USEXP, SEXP U_mirrorSEXP, SEXP paraMatSEXP, SEXP extraParamSEXP, SEXP mask_setSEXP, SEXP unmask_setSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type U(USEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type U_mirror(U_mirrorSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type paraMat(paraMatSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type extraParam(extraParamSEXP);
+    Rcpp::traits::input_parameter< arma::uvec >::type mask_set(mask_setSEXP);
+    Rcpp::traits::input_parameter< arma::uvec >::type unmask_set(unmask_setSEXP);
+    rcpp_result_gen = Rcpp::wrap(LogLike_finite(U, U_mirror, paraMat, extraParam, mask_set, unmask_set));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_zap_blfdr_fn", (DL_FUNC) &_zap_blfdr_fn, 7},
@@ -266,6 +287,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_zap_LogLike_asymp", (DL_FUNC) &_zap_LogLike_asymp, 3},
     {"_zap_neg_Q_fn_finite_beta_part", (DL_FUNC) &_zap_neg_Q_fn_finite_beta_part, 5},
     {"_zap_neg_Q_fn_finite_beta_part_grad_cpp", (DL_FUNC) &_zap_neg_Q_fn_finite_beta_part_grad_cpp, 5},
+    {"_zap_LogLike_finite", (DL_FUNC) &_zap_LogLike_finite, 6},
     {NULL, NULL, 0}
 };
 

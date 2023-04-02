@@ -23,15 +23,15 @@ double neg_LogLike_LeftBeta(arma::vec beta_l, arma::vec U, arma::mat X_tilde, do
 arma::vec neg_LogLike_LeftBeta_grad(arma::vec beta_l, arma::vec U, arma::mat X_tilde, double gamma_l) {
 
   arma::vec exp_neg_X_beta_l  =  exp(-X_tilde*beta_l)   ;
- 
+
   arma::vec k_l = 1/(1 + exp_neg_X_beta_l);
   NumericVector k_l_rcpp = wrap( k_l   );
   arma::vec digamma_k_l  = digamma(k_l_rcpp);
   arma::vec digamma_k_l_gamma_l  =  digamma(k_l_rcpp + gamma_l);
 
   arma::vec Df_Dk_l = trunc_log(U) - digamma_k_l + digamma_k_l_gamma_l  ;
-  arma::mat Dk_l_Dbeta_l = X_tilde.each_col() % (square(k_l)%exp_neg_X_beta_l);  
- 
+  arma::mat Dk_l_Dbeta_l = X_tilde.each_col() % (square(k_l)%exp_neg_X_beta_l);
+
   arma::vec gradient = trans(Dk_l_Dbeta_l)*Df_Dk_l;
   return(-gradient) ;
 }
@@ -52,7 +52,7 @@ double neg_LogLike_RightBeta(arma::vec beta_r, arma::vec U, arma::mat X_tilde, d
 //
 // This is a function that evaluate the right leaning beta negative log likelihood gradient for a vector of u-values
 //param beta_r The first shape parameter
-//param U A vector of u-values to evaluate the beta density on 
+//param U A vector of u-values to evaluate the beta density on
 //param X_tilde A matrix of the covariates augmented with 1's as intercepts. Should have the same number of rows as the length of U
 //param gamma_r The second shape parameter, should be greater than 2
 //return the evaluated negative log likelihood gradient, a vector of dimension p
@@ -61,15 +61,15 @@ double neg_LogLike_RightBeta(arma::vec beta_r, arma::vec U, arma::mat X_tilde, d
 arma::vec neg_LogLike_RightBeta_grad(arma::vec beta_r, arma::vec U, arma::mat X_tilde, double gamma_r) {
 
   arma::vec exp_neg_X_beta_r  =  exp(-X_tilde*beta_r)   ;
- 
+
   arma::vec k_r = 1/(1 + exp_neg_X_beta_r);
   NumericVector k_r_rcpp = wrap( k_r   );
   arma::vec digamma_k_r  = digamma(k_r_rcpp);
   arma::vec digamma_k_r_gamma_r  =  digamma(k_r_rcpp + gamma_r);
 
   arma::vec Df_Dk_r = trunc_log(1 - U) - digamma_k_r + digamma_k_r_gamma_r  ;
-  arma::mat Dk_r_Dbeta_r = X_tilde.each_col() % (square(k_r)%exp_neg_X_beta_r);  
- 
+  arma::mat Dk_r_Dbeta_r = X_tilde.each_col() % (square(k_r)%exp_neg_X_beta_r);
+
   arma::vec gradient = trans(Dk_r_Dbeta_r)*Df_Dk_r;
   return(-gradient) ;
 }
@@ -169,5 +169,49 @@ arma::vec neg_Q_fn_finite_beta_part_grad_cpp(arma::vec param_beta, arma::mat Yma
   gradient.subvec(k, 2*k-1)  = trans(Dk_r_Dbeta_r )*Df_Dk_r  ;
 
   return(-gradient) ;
+}
+
+
+
+// [[Rcpp::export]]
+double LogLike_finite(arma::vec U,  arma::vec U_mirror,  arma::mat paraMat, arma::vec extraParam, arma::uvec mask_set, arma::uvec unmask_set){
+
+  arma::vec U_unmask = U(unmask_set - 1);
+  arma::vec U_mask = U(mask_set - 1);
+  arma::vec U_mirror_mask = U_mirror(mask_set - 1);
+
+  arma::vec k_l = paraMat.col(0);
+  arma::vec k_r = paraMat.col(1);
+  arma::vec exp_Xtheta_l = paraMat.col(2);
+  arma::vec exp_Xtheta_r = paraMat.col(3);
+  arma::vec base =  1 + exp_Xtheta_l + exp_Xtheta_r ;
+  arma::vec B_l = exp(lgamma(k_l) + lgamma(extraParam(0) ) - lgamma(k_l + extraParam(0) ));
+  arma::vec B_r = exp(lgamma(k_r) + lgamma(extraParam(1)) - lgamma(k_r + extraParam(1)));
+
+  arma::vec k_l_unmask = k_l(unmask_set - 1);
+  arma::vec k_r_unmask = k_r(unmask_set - 1);
+  arma::vec exp_Xtheta_l_unmask = exp_Xtheta_l(unmask_set - 1);
+  arma::vec exp_Xtheta_r_unmask = exp_Xtheta_r(unmask_set - 1);
+  arma::vec B_l_unmask = B_l(unmask_set - 1);
+  arma::vec B_r_unmask = B_r(unmask_set - 1);
+
+  arma::vec k_l_mask = k_l(mask_set - 1);
+  arma::vec k_r_mask = k_r(mask_set - 1);
+  arma::vec exp_Xtheta_l_mask = exp_Xtheta_l(mask_set - 1);
+  arma::vec exp_Xtheta_r_mask = exp_Xtheta_r(mask_set - 1);
+  arma::vec B_l_mask = B_l(mask_set - 1);
+  arma::vec B_r_mask = B_r(mask_set - 1);
+
+  arma::vec like_vec_unmask =  1 +
+    exp_Xtheta_l_unmask%exp( (k_l_unmask -1)%trunc_log(U_unmask)+ (extraParam(0) - 1)*trunc_log(1 - U_unmask))/B_l_unmask +
+    exp_Xtheta_r_unmask%exp((extraParam(1) - 1)*trunc_log(U_unmask)+ (k_r_unmask -1 )%trunc_log(1 - U_unmask))/B_r_unmask;
+
+  arma::vec like_vec_mask =  2 +
+    exp_Xtheta_l_mask%exp( (k_l_mask -1)%trunc_log(U_mask)+ (extraParam(0) - 1)*trunc_log(1 - U_mask))/B_l_mask +
+    exp_Xtheta_l_mask%exp( (k_l_mask -1)%trunc_log(U_mirror_mask)+ (extraParam(0) - 1)*trunc_log(1 - U_mirror_mask))/B_l_mask +
+    exp_Xtheta_r_mask%exp((extraParam(1) - 1)*trunc_log(U_mask)+ (k_r_mask  -1 )%trunc_log(1 - U_mask))/B_r_mask +
+    exp_Xtheta_r_mask%exp((extraParam(1) - 1)*trunc_log(U_mirror_mask)+ (k_r_mask -1 )%trunc_log(1 - U_mirror_mask))/B_r_mask;
+
+  return(accu(trunc_log(like_vec_unmask)) + accu(trunc_log(like_vec_mask)) - accu(trunc_log(base))  );
 }
 

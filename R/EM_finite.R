@@ -39,7 +39,7 @@ EM_finite= function(U, U_mirror, tol,  unmask_set,  mask_set,
 
   ### this part begins the breaking down the two optimization problems
 
-    param_beta <- optim(par = beta0,
+    param_beta <- stats::optim(par = beta0,
                         gr = neg_Q_fn_finite_beta_part_grad_cpp,
                         fn = neg_Q_fn_finite_beta_part,
                         Ymat = Ymat, Hmat = Hmat,
@@ -97,7 +97,7 @@ EM_finite_fix_point_fn = function(param, U, U_mirror, unmask_set,  mask_set, ext
   Ymat <- overall_Ymat( Ymat_mask = Hmat_Ymat_list_mask$Ymat, U_unmask = U[unmask_set],
                         mask_set = mask_set, unmask_set = unmask_set )
 
-  param_beta <- optim(par = param[1:(2*k)],
+  param_beta <- stats::optim(par = param[1:(2*k)],
                       gr = neg_Q_fn_finite_beta_part_grad_cpp,
                       fn = neg_Q_fn_finite_beta_part,
                       Ymat = Ymat, Hmat = Hmat,

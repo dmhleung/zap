@@ -9,7 +9,7 @@ ns_expand = function(x , df){
       rownames(X_ls[[i]]) = NULL
     }else{
       X_ls[[i]]  <-do.call(what = cbind,
-                           args  = lapply(X = as.list(x),  FUN = ns, df = i))
+                           args  = lapply(X = as.list(x),  FUN = splines::ns, df = i))
       colnames(X_ls[[i]]) = NULL
       rownames(X_ls[[i]]) = NULL
     }
