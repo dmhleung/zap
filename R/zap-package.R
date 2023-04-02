@@ -1,3 +1,6 @@
+#' @keywords internal
+"_PACKAGE"
+
 ## usethis namespace: start
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib zap, .registration = TRUE
