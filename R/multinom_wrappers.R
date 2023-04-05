@@ -15,7 +15,7 @@ zap_multinom_nnet = function(Hmat, X_tilde){
 ## glmnet
 zap_multinom_glmnet = function(Hmat, X_tilde){
   k <- ncol(X_tilde)
-  if (k < 2){
+  if (k < 3){
     # throw an error
     stop("glmnet cannot take less than 2 covariates")
   }else{

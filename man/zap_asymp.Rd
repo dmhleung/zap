@@ -7,50 +7,47 @@
 zap_asymp(
   z,
   X,
-  beta_incpt_init = c(log(5), log(5)),
-  theta_incpt_init = c(log(0.1), log(0.1)),
-  gamma = c(4, 4),
-  alpha = 0.05,
+  param_init = NULL,
+  gamma_l = 4,
+  gamma_r = 4,
   gen_size = 50000,
-  maxit = 100,
-  tol = 1e-04,
+  alpha = 0.05,
   ep = 1,
-  uvals.cutoff = 1e-15
+  uvals.cutoff = 1e-15,
+  tol = 1e-04,
+  maxit = 100,
+  workhorse = "glmnet"
 )
 }
 \arguments{
-\item{z}{a vector of z-values}
+\item{z}{a vector of z-values of length n}
 
-\item{X}{a matrix of dimension n by p, where  n is the length of z and p is
-the number of covariates. p should at least be 1.}
+\item{X}{a covariate matrix of dimension n by p, where  n is the length of z and p is
+the number of covariates; p must at least be 1, i.e. there must be at least one covariate, intercept excluded. Must be a matrix (even if it has just one column).}
 
-\item{beta_incpt_init}{a numeric vector of length 2 concatenating initial values
-for the INTERCEPT coefficients of the vectors \eqn{\beta_l} and
-\eqn{\beta_r} in that order. Default to c(log(5),  log(5)).}
+\item{param_init}{a numeric vector of the form \eqn{(\beta_l, \beta_r, \theta_l, \theta_r)} that initialized he values for \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r}, in that order; see the paper.  By default, if there is no input from the user ( \code{param_init = NULL} ), the intercept coefficients in \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r} are set to be \eqn{log(5)}, \eqn{log(5)}, \eqn{log(0.1)} and \eqn{log(0.1)} respectively; all the other coefficients are set to be zero.}
 
-\item{theta_incpt_init}{a numeric vector of length 2 concatenating initial values
-for the INTERCEPT coefficients of the vectors \eqn{\theta_l} and
-\eqn{\theta_r} in that order. Default to c(log(0.1),  log(0.1)).}
+\item{gamma_l}{the choice of  \eqn{\gamma_l}, the second shape parameter for the left-leaning beta density. Default to 4.}
 
-\item{gamma}{a numeric vector of length 2 concatenating the second shape parameters
-\eqn{\gamma_l}, \eqn{\gamma_r}  for the left-leaning and right-leaning beta
-densities in that order. Default to c(4, 4).}
-
-\item{alpha}{targeted FDR level. Default to 0.05.}
+\item{gamma_r}{the choice of  \eqn{\gamma_r}, the second shape parameter for the right-leaning beta density. Default to 4.}
 
 \item{gen_size}{number of random uniformly distributed realizations generated
 to estimate the mirror statistics. Default to 50000.}
 
-\item{maxit}{maximum number of iterations for the EM algorithm}
+\item{alpha}{targeted FDR level. Default to 0.05.}
 
-\item{tol}{tolerance}
-
-\item{ep}{additive factor in the numerator of the FDP estimates in ZAP.
-Default is 1. Changing it may result in an inflated FDR of the procedure.}
+\item{ep}{additive factor in the numerator of the FDP estimates in ZAP;
+default to 1. Changing it may result in an inflated FDR of the procedure.}
 
 \item{uvals.cutoff}{an ``epsilon-small" number. The u-values will be cut off
-to be within the interval \deqn{[uvals.cutoff, 1 - uvals.cutoff].} This
+to be within the interval \deqn{[uvals.cutoff, \quad 1 - uvals.cutoff].} This
 stabilizes the beta mixture density estimation. Default is 1e-15.}
+
+\item{tol}{tolerance level to terminate the EM algorithm if \deqn{\|(\beta_l, \beta_r, \theta_l, \theta_r)^{(t)} - (\beta_l, \beta_r, \theta_l, \theta_r)^{(t+1)}\|_2 \leq tol,} where \eqn{\|\cdot\|_2} is the Euclidean norm. Default to 0.0001.}
+
+\item{maxit}{maximum number of iterations performed for the EM algorithm. Default to 100.}
+
+\item{workhorse}{the workhorse for running the multinomial logit regression for the class probabilities under the hood; can choose between "glmnet" and "nnet", which correspond to the functions \code{glmnet::glmnet()} and \code{nnet::multinom()} respectively. Default to "glmnet", which is recommended for p >= 2, i.e. when the covariate matrix \code{X} has two or more columns. If p = 1, it is automatically fixed to be "nnet" (Since \code{glmnet::glmnet()} can only take two or more covariates).}
 }
 \value{
 a list with containing the followings: \itemize{ \item rej_index: a
