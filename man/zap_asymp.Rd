@@ -25,7 +25,7 @@ zap_asymp(
 \item{X}{a covariate matrix of dimension n by p, where  n is the length of z and p is
 the number of covariates; p must at least be 1, i.e. there must be at least one covariate, intercept excluded. Must be a matrix (even if it has just one column).}
 
-\item{param_init}{a numeric vector of the form \eqn{(\beta_l, \beta_r, \theta_l, \theta_r)} that initialized he values for \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r}, in that order; see the paper.  By default, if there is no input from the user ( \code{param_init = NULL} ), the intercept coefficients in \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r} are set to be \eqn{log(5)}, \eqn{log(5)}, \eqn{log(0.1)} and \eqn{log(0.1)} respectively; all the other coefficients are set to be zero.}
+\item{param_init}{a numeric vector of the form \eqn{(\beta_l, \beta_r, \theta_l, \theta_r)} that initialized the values for \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r}, in that order; see the paper.  By default, if there is no input from the user ( \code{param_init = NULL} ), the intercept coefficients in \eqn{\beta_l}, \eqn{\beta_r}, \eqn{\theta_l} and \eqn{\theta_r} are set to be \eqn{log(5)}, \eqn{log(5)}, \eqn{log(0.1)} and \eqn{log(0.1)} respectively; all the other coefficients are set to be zero.}
 
 \item{gamma_l}{the choice of  \eqn{\gamma_l}, the second shape parameter for the left-leaning beta density. Default to 4.}
 
