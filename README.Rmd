@@ -35,6 +35,7 @@ This is a basic example which shows you how to use `zap_asymp()`, taken from Set
 
 ```{r zap example}
 set.seed(123)
+RNGkind("L'Ecuyer-CMRG")
 library(zap)
 ## basic example code
 dens = -2
