@@ -22,8 +22,8 @@ devtools::install_github("dmhleung/zap")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem,
-taken from Setup 1 in Section 4.1 of the
+This is a basic example which shows you how to use `zap_asymp()`, taken
+from Setup 1 in Section 4.1 of the
 [paper](https://academic.oup.com/jrsssb/article/84/5/1886/7072884), for
 the simulation parameters
 ![\zeta = 0.5](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Czeta%20%3D%200.5 "\zeta = 0.5"),

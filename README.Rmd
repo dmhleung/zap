@@ -31,7 +31,7 @@ devtools::install_github("dmhleung/zap")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem, taken from Setup 1 in Section  4.1 of the [paper](https://academic.oup.com/jrsssb/article/84/5/1886/7072884), for the simulation parameters $\zeta = 0.5$, $\epsilon = 1.9$ and $\eta = -2$:
+This is a basic example which shows you how to use `zap_asymp()`, taken from Setup 1 in Section  4.1 of the [paper](https://academic.oup.com/jrsssb/article/84/5/1886/7072884), for the simulation parameters $\zeta = 0.5$, $\epsilon = 1.9$ and $\eta = -2$:
 
 ```{r zap example}
 set.seed(123)
