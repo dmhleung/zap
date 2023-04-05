@@ -33,7 +33,7 @@ and
 
 ``` r
 set.seed(123)
-RNGkind("L'Ecuyer-CMRG")
+RNGkind("L'Ecuyer-CMRG") # make sure we can reproduce the result even using parallel computing
 library(zap)
 ## basic example code
 dens = -2
